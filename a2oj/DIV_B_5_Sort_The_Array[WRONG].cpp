@@ -16,7 +16,7 @@ int main() {
     int start=0, end=0;
     bool flag = true;
 
-    for(int i = 0; i < n + 1; ++i){
+    for(int i = 1; i < n + 1; ++i){
 
         int j = i;
         start = end = i;
@@ -28,7 +28,7 @@ int main() {
                 if(vec.at(j) > vec.at(j+1)) ++end;
                 else {
                     // Starts increasing, but cannot reverse
-                    if(vec.at(start) > vec.at(j+1)){
+                    if(vec.at(start) > vec.at(j+1) || vec.at(end) < vec.at(start-1)){
                         flag = false;
                         break;
                     }
