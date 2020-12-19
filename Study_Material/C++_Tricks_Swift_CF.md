@@ -78,9 +78,9 @@ cout << get<2>(t) << '\n';
 ```
 Note that it doesn't work for stack and queue.
 
-2. Name of argument in macros
+## 2. Name of argument in macros
 You can use '#' sign to get exact name of an argument passed to a macro:
-
+```c++
 #define what_is(x) cerr << #x << " is " << x << endl;
 // ...
 int a_variable = 376;
@@ -88,61 +88,53 @@ what_is(a_variable);
 // prints "a_variable is 376"
 what_is(a_variable * 2 + 1)
 // prints "a_variable * 2 + 1 is 753"
-3. Get rid of those includes!
+```
+## 3. Get rid of those includes!
 Simply use
 
+```c++
 #include <bits/stdc++.h>
+```
 This library includes many of libraries we do need in contest like algorithm, iostream, vector and many more. Believe me you don't need to include anything else!
-
-4. Hidden function (not really hidden but not used often)
-one)
-
-__gcd(value1, value2)
+ 
+## 4. Hidden function (not really hidden but not used often
+* `__gcd(value1, value2)`
 You don't need to code Euclidean Algorithm for a gcd function, from now on we can use. This function returns gcd of two numbers.
 
-e.g. __gcd(18, 27) = 9.
+e.g. `__gcd(18, 27) = 9.`
 
-two)
-
-__builtin_ffs(x)
+* `__builtin_ffs(x)`
 This function returns 1 + least significant 1-bit of x. If x == 0, returns 0. Here x is int, this function with suffix 'l' gets a long argument and with suffix 'll' gets a long long argument.
 
-e.g. __builtin_ffs(10) = 2 because 10 is '...10 1 0' in base 2 and first 1-bit from right is at index 1 (0-based) and function returns 1 + index.
+e.g.` __builtin_ffs(10) = 2` because 10 is `'...10 1 0'` in base 2 and first 1-bit from right is at index 1 (0-based) and function returns 1 + index.
 
-three)
-
-__builtin_clz(x)
+* `__builtin_clz(x)`
 This function returns number of leading 0-bits of x which starts from most significant bit position. x is unsigned int and like previous function this function with suffix 'l gets a unsigned long argument and with suffix 'll' gets a unsigned long long argument. If x == 0, returns an undefined value.
 
-e.g. __builtin_clz(16) = 27 because 16 is ' ... 10000'. Number of bits in a unsigned int is 32. so function returns 32 — 5 = 27.
+e.g. `__builtin_clz(16) = 27` because 16 is `' ... 10000'`. Number of bits in a unsigned int is 32. so function returns 32 — 5 = 27.
 
-four)
-
-__builtin_ctz(x)
+* `__builtin_ctz(x)`
 This function returns number of trailing 0-bits of x which starts from least significant bit position. x is unsigned int and like previous function this function with suffix 'l' gets a unsigned long argument and with suffix 'll' gets a unsigned long long argument. If x == 0, returns an undefined value.
 
-e.g. __builtin_ctz(16) = 4 because 16 is '...1 0000 '. Number of trailing 0-bits is 4.
+e.g. `__builtin_ctz(16) = 4` because 16 is `'...1 0000 '`. Number of trailing 0-bits is 4.
 
-five)
-
-__builtin_popcount(x)
+* `__builtin_popcount(x)`
 This function returns number of 1-bits of x. x is unsigned int and like previous function this function with suffix 'l' gets a unsigned long argument and with suffix 'll' gets a unsigned long long argument. If x == 0, returns an undefined value.
 
-e.g. __builtin_popcount(14) = 3 because 14 is '... 111 0' and has three 1-bits.
+e.g. `__builtin_popcount(14) = 3 because 14 is '... 111 0' and has three 1-bits.`
 
-Note: There are other __builtin functions too, but they are not as useful as these ones.
+Note: There are other `__builtin` functions too, but they are not as useful as these ones.
 
-Note: Other functions are not unknown to bring them here but if you are interested to work with them, I suggest this website.
-
-5. Variadic Functions and Macros
+## 5. Variadic Functions and Macros
 We can have a variadic function. I want to write a sum function which gets a number of ints, and returns sum of them. Look at the code below:
-
+```c++
 int sum() { return 0; }
 
 template<typename... Args>
 int sum(int a, Args... args) { return a + sum(args...); }
 
 int main() { cout << sum(5, 7, 2, 2) + sum(3, 4); /* prints "23" */ }
+```
 In the code above I used a template. sum(5, 7, 2, 2) becomes 5 + sum(7, 2, 2) then sum(7, 2, 2), itself, becomes 7 + sum(2, 2) and so on... I also declare another sum function which gets 0 arguments and returns 0.
 
 I can even define a any-type sum function:
@@ -193,7 +185,7 @@ b = 8
 c = 9
 This function helps a lot in debugging.
 
-6. Here is C++0x in CF, why still C++?
+## 6. Here is C++0x in CF, why still C++?
 Variadic functions also belong to C++11 or C++0x, In this section I want to show you some great features of C++11.
 
 one) Range-based For-loop
@@ -245,7 +237,7 @@ And here is the reason: " \n" is a char*, " \n"[0] is ' ' and " \n"[1] is '\n'.
 From tubo28's comment:
 
 Usage of tie and emplace_back:
-
+```c++
 #define mt make_tuple
 #define eb emplace_back
 typedef tuple<int,int,int> State; // operator< defined
@@ -269,6 +261,7 @@ int main(){
     q.emplace(-new_dist, new_node, node);
   }
 }
+```
 And that's why emplace_back faster: emplace_back is faster than push_back 'cause it just construct value at the end of vector but push_back construct it somewhere else and then move it to the vector.
 
 Also in the code above you can see how tie(args...) works. You can also use ignore keyword in tie to ignore a value:
@@ -280,16 +273,19 @@ cout << a << ' ' << b << '\n';
 Output: 5 3
 
 I use this macro and I love it:
-
+```c++
 #define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end)); i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+```
+
 First of all, you don't need to name the type you want to use. Second of all it goes forwards and backwards based on (begin > end) condition. e.g. rep(i, 1, 10) is 1, 2, ..., 8, 9 and rep(i, 10, 1) is 9, 8, ..., 2, 1
 
 It works well with different types e.g.
-
+```c++
 vector<int> v = {4, 5, 6, 4, 8};
 rep(it, end(v), begin(v))
     cout << *it << ' ';
 // prints "8 4 6 5 4"
+```
 Also there is another great feature of C++11, lambda functions!
 
 Lambdas are like other languages' closure. It defines like this:
@@ -337,8 +333,8 @@ v:
 w: 1 2 3 4 
 As you can see v moved to w and not copied.
 
-7. C++0x Strings
-one) Raw Strings (From IvayloS's comment)
+## 7. C++0x Strings
+* ### Raw Strings (From IvayloS's comment)
 
 You can have UTF-8 strings, Raw strings and more. Here I want to show raw strings. We define a raw string as below:
 
@@ -415,7 +411,7 @@ int main() {
 }
 Note that a literal should start with an underscore (_). We declare a new literal by this pattern:
 
-[returnType] operator "" _[name]([parameters]) { [body] }
+`[returnType] operator "" _[name]([parameters]) { [body] }`
 note that parameters only can be one of these:
 
 (const char *)
