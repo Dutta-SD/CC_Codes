@@ -12,14 +12,33 @@ then the remaining shots can always be distributed in the desired way.
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
+int main()
+{
     int t;
     cin >> t;
-    while(t--){
+    while (t--)
+    {
         int a, b, c, k;
         cin >> a >> b >> c;
-        if()
-        
+
+        if ((a + b + c) % 9 == 0)
+        {
+            k = (a + b + c) / 9;
+
+            if (a >= k && b >= k && c >= k)
+            {
+                cout << "YES\n";
+                continue;
+            }
+            else
+            {
+                cout << "NO\n";
+            }
+        }
+        else
+        {
+            cout << "NO\n";
+        }
     }
     return 0;
 }
