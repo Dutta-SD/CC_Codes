@@ -1,19 +1,21 @@
 # include <iostream>
-# include <cstdlib>
 using namespace std;
+typedef long long ll;
 
 int main() {
-    long t, dest;
+    ll t;
     cin >> t;
-    long jump_count = 0, cur_pos = 0;
-    while(t--){
-        cin >> dest;
-        while(cur_pos < dest){
-            ++jump_count;
-            cur_pos += jump_count;
+    while (t--){
+        ll final_pos;
+        cin >> final_pos;
+        ll i;
+        for(i = 1; i*(i+1) < 2*final_pos; ++i);
+        if(i*(i+1) / 2 - final_pos == 1){
+            cout << i+1 <<"\n";
         }
-
-        cout << "\t" << jump_count + (cur_pos - dest) << "\n";
+        else{
+            cout << i <<"\n";
+        }        
     }
     return 0;
 }
