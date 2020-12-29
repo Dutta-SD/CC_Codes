@@ -6,7 +6,8 @@ s , t = s-1, t
 if t == v[s]:
     print(0)
     exit(0)
-while True:
+
+for _ in range(n):
     v = [v[i] for i in p]
     num_moves += 1
     if t == v[s]:
@@ -15,4 +16,4 @@ while True:
     if s + 1 == v[s]:
         print(-1)
         exit(0)
-print(num_moves)
+print(-1 if num_moves == 0 else num_moves)
