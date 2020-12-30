@@ -1,26 +1,10 @@
-from collections import deque
+# RBS 
 t = int(input())
 for _ in range(t):
-    seq = input()
-    stk = deque()
-    flag = True
-
-    for c in seq:
-        if c == ")":
-            if len(stk) == 0:
-                flag = False
-                break
-            else :
-                stk.pop()
-        elif c == "(":
-            stk.append(c)
-        else:
-            if len(stk) != 0:
-                stk.pop()            
-            else:
-                stk.append(c)
-
-    if flag and len(stk) == 0:
-        print("YES")
+    s = input()
+    if len(s) % 2 != 0:
+        print('NO')
+    elif s[0] == ')' or s[-1] == '(':
+        print('NO')
     else:
-        print("NO")
+        print('YES')
