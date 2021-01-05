@@ -23,7 +23,7 @@ void solve(){
             s[i] += s[j];            
         }          
     }
-    print(s);
+    // print(s);
     cout << *max_element(s.begin(), s.end()) <<"\n";     
 }
 int main() {
