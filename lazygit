@@ -4,27 +4,30 @@
 ## To code repository
 ## Will work if already upstream task set
 ## to remote repository
-## Author : Sandip Dutta
+## @author : Sandip Dutta
 
 echo -e "Uploading to $(git remote get-url origin)\n"
 
+## Remove empty files
+$(find -type f -empty -delete)
+
 # remove executables, reject rm output for empty removal
 # code mainly in python and c++, so these two
-ls | grep -vE "(\.cpp$|\.py|\.md|lazygit$)"| xargs rm 2> /dev/null
+# [WARNING] Hard coded behaviour. Be careful.
+ls | grep -vE "(\.cpp|\.py|\.md|lazygit|\.c|\.pdf)"| xargs rm 2> /dev/null
 
-echo "Removed Executable Files"
 
+## Add all changes
 git add .
 
 today_date=$(date +%D)
 
-message="New Problems Added"
+custom_message="New Problems Added"
 
 if [ $# -gt 0 ]
 then
-	message=$1
+	custom_message=$1
 fi
 
-git commit -m "$today_date - $message"
+git commit -m "$today_date - $custom_message"
 git push
-echo -e "\nPushing Successful..."
