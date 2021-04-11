@@ -8,7 +8,7 @@ d = dist(0, 0, x, y)
 
 k = int(d // r)
 
-if d <= r:
+if d < r:
     print(2)
 elif d % r == 0:
     print(k)
