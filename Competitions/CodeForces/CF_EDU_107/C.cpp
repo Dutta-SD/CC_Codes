@@ -1,20 +1,25 @@
 # include <bits/stdc++.h>
-// # define DEBUG 1
 using namespace std;
-using ll = long long;
-
-void solve(){
-    ll n, q;
-    cin >> n >> q;
-    
-          
-}
+// # pragma GCC optimize("03")
 
 int main(){
-    int t = 1;
-    cin >> t;
-    while(t--){
-        solve();
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n, q;
+    cin >> n >> q;
+
+    vector <int> v(n);
+
+    for(auto & x : v){cin >> x;}
+
+    while(q--){
+        int x;
+        cin >> x;
+        int p = find(v.begin(), v.end(), x) - v.begin();
+        cout << p+1 <<" ";
+        rotate(v.begin(), v.begin() + p, v.begin() + p + 1);
     }
+
     return 0;
 }
