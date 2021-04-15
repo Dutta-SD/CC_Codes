@@ -20,9 +20,10 @@ int main (){
     while(m--){
         cin >> temp;
         auto i = v.upper_bound(temp);
-        if(i == v.end()){
+        if(i == v.begin()){
             cout << -1 << "\n";
         } else {
+            --i;
             cout << *i <<"\n";
             v.erase(i);
         }
