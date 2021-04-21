@@ -15,7 +15,7 @@ for i in n:
 
 if s % 3 == 0:
   print(0)
-elif classes[s % 3] == 0:
+elif classes[s % 3] == 0 and len(n) == 1:
   print(-1)
 else:
   print(1)
