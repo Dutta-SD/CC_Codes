@@ -1,5 +1,9 @@
 # include <bits/stdc++.h>
 using namespace std;
+// Lessons - 
+// XOR is associative
+// READ THE PROBLEM CAREFULLY
+// ADJACENT ELEMENTS - SUBARRAY OPERATIONS
 
 void solve(){
     unsigned n, k, x_value {0};
