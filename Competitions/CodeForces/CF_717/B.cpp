@@ -1,43 +1,33 @@
 # include <bits/stdc++.h>
-// # define printarr(v) {cout << #v <<"\n"; for(auto &i : v) cout << i <<" "; cout << "\n";}
 using namespace std;
 
 void solve(){
-    unsigned n, k;
+    unsigned n, k, x_value {0};
     cin >> n;
     vector <unsigned> v(n);
-    vector <unsigned> xor_left(n);
-    vector <unsigned> xor_right(n);
-
-    for(auto &i : v) cin >> i;
-
-    xor_left[0] = xor_right[0] = v[0];
-    xor_left[n-1] = xor_right[n-1] = v[n-1];
-
-    for(unsigned i = 1; i < n - 1; ++i){
-        xor_left[i] = xor_left[i - 1] ^ v[i];
+    for(int i = 0; i < n; ++i){
+        cin >> v[i];
+        x_value ^= v[i];
     }
 
-    for(unsigned i = n - 2; i > 0; --i){
-        xor_right[i] = xor_right[i + 1] ^ v[i];
+    if(x_value == 0){
+        cout << "YES\n";
+        return;
     }
 
-    // printarr(xor_left);
-    // printarr(xor_right);
+    int t{0};
+    int count {0};
 
-
-    // Final Loop
-    for(unsigned i = 0; i < n - 1; ++i){
-
-        // cout << "CHECKING  :  " << i << " POSITION\n";
-        if(xor_left[i] == xor_right[i +1]){
-
-        
-            cout << "YES\n";
-            return;
+    for(int i = 0; i < n; ++i){
+        t ^= v[i];
+        if(t == x_value){
+            t = 0;
+            ++count;
         }
     }
-    cout << "NO\n";   
+
+    if (count >= 2) cout <<"YES\n";
+    else cout << "NO\n";   
 }
 
 int main(){
