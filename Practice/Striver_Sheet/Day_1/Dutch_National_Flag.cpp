@@ -9,21 +9,22 @@ int main(){
     int mid = 0;
     int high = n - 1;
 
-
-    while(mid <= high){
+    while (mid <= high)
+    {
         // Single Pass clustering
-        switch(arr[mid]){
-            case 0:
+        switch (arr[mid])
+        {
+        case 0:
             // mid = 0
             swap(arr[low++], arr[mid++]);
             break;
 
-            case 1:
+        case 1:
             // mid == 1
             mid++;
             break;
 
-            case 2:
+        case 2:
             // mid == 2
             swap(arr[mid], arr[high--]);
             break;
