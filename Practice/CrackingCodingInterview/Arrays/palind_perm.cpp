@@ -17,7 +17,18 @@ bool is_palin_perm(const string & s){
     return true;
 }
 
+/* 
+INPLACE IDEA:
+----------------------------------------------------------------------
+1> Sort the Array
+2> Traverse the array.  If get a char which is not same as prev char:
+    count occurrences
+    move pointer ahead by 1
 
+    if count is odd, n_odd ++;
+3> if n_odd < 2, then good;
+
+*/
 
 int main(){
     string s1;
