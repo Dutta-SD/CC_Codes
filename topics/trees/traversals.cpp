@@ -58,11 +58,11 @@ void printVector(vector<T> vec) {
 }
 
 /* Traversals in Trees */
-void preOrderTraverse(const BinaryTreeNode *root) {
+void preOrderTraverseRecursively(const BinaryTreeNode *root) {
     if (!root) return;
     processCurrentNode(root->data);
-    preOrderTraverse(root->left);
-    preOrderTraverse(root->right);
+    preOrderTraverseRecursively(root->left);
+    preOrderTraverseRecursively(root->right);
 }
 
 void postOrderTraverse(const BinaryTreeNode *root) {
@@ -72,11 +72,11 @@ void postOrderTraverse(const BinaryTreeNode *root) {
     processCurrentNode(root->data);
 }
 
-void inOrderTraverse(const BinaryTreeNode *root) {
+void inOrderTraverseRecursively(const BinaryTreeNode *root) {
     if (!root) return;
-    inOrderTraverse(root->left);
+    inOrderTraverseRecursively(root->left);
     processCurrentNode(root->data);
-    inOrderTraverse(root->right);
+    inOrderTraverseRecursively(root->right);
 }
 
 vector<int> preOrderTraverseNoRecursion(BinaryTreeNode *root) {
@@ -102,40 +102,42 @@ vector<int> preOrderTraverseNoRecursion(BinaryTreeNode *root) {
 }
 
 vector<int> inOrderTraversalNoRecursion(BinaryTreeNode *root) {
-    // NOTE: NO
     vector<int> nodeTraversalList;
-    if (!root) return nodeTraversalList;
-
     stack<BinaryTreeNode *> nodeStack;
     BinaryTreeNode *currentNode = root;
-    nodeStack.push(currentNode);
 
-    while (!nodeStack.empty()) {
-        // Right Node
-        if (currentNode->right) {
-            nodeStack.push(currentNode->right);
+    while (true) {
+        if (currentNode) {
+            nodeStack.push(currentNode);
+            currentNode = currentNode->left;
+        } else {
+            if (nodeStack.empty()) break;
+            currentNode = nodeStack.top();
+            nodeStack.pop();
+            nodeTraversalList.push_back(currentNode->data);
+            currentNode = currentNode->right;
         }
-
-        if (currentNode->left) {
-            nodeStack.push(currentNode->left);
-        }
-        currentNode = nodeStack.top();
-        nodeStack.pop();
-
-        nodeTraversalList.push_back(currentNode->data);
     }
     return nodeTraversalList;
 }
 
+void comparePreOrderTraversals(BinaryTreeNode *root) {
+    cout << "PRE ORDER WITH RECURSION\n";
+    preOrderTraverseRecursively(root);
+    cout << "\nPRE ORDER WITHOUT RECURSION\n";
+    printVector(preOrderTraverseNoRecursion(root));
+}
+
+void compareInOrderTraversals(BinaryTreeNode *root) {
+    cout << "IN ORDER WITH RECURSION\n";
+    inOrderTraverseRecursively(root);
+    cout << "\nIN ORDER WITHOUT RECURSION\n";
+    printVector(inOrderTraversalNoRecursion(root));
+}
+
 int main() {
     BinaryTreeNode *root = makeSampleTree();
-    preOrderTraverse(root);
-    cout << '\n';
-    postOrderTraverse(root);
-    cout << '\n';
-    inOrderTraverse(root);
-    cout << '\n';
-    printVector(preOrderTraverseNoRecursion(root));
-    printVector(inOrderTraversalNoRecursion(root));
+    compareInOrderTraversals(root);
+    comparePreOrderTraversals(root);
     return 0;
 }
