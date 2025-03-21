@@ -1,6 +1,20 @@
-0
-0
-0
-0
-0
-0
+i 10A_i 99999B_i 1
+i 9A_i 100000B_i 2
+i 8A_i 4B_i 3
+i 7A_i 3B_i 4
+i 6A_i 2B_i 5
+i 5A_i 1B_i 6
+i 4A_i 4B_i 6
+i 3A_i 3B_i 6
+i 2A_i 2B_i 6
+i 1A_i 1B_i 6
+6
+6
+6
+6
+6
+5
+4
+3
+2
+1
