@@ -67,16 +67,16 @@ void preOrderTraverse(const BinaryTreeNode *root) {
 
 void postOrderTraverse(const BinaryTreeNode *root) {
     if (!root) return;
-    preOrderTraverse(root->left);
-    preOrderTraverse(root->right);
+    postOrderTraverse(root->left);
+    postOrderTraverse(root->right);
     processCurrentNode(root->data);
 }
 
 void inOrderTraverse(const BinaryTreeNode *root) {
     if (!root) return;
-    preOrderTraverse(root->left);
+    inOrderTraverse(root->left);
     processCurrentNode(root->data);
-    preOrderTraverse(root->right);
+    inOrderTraverse(root->right);
 }
 
 vector<int> preOrderTraverseNoRecursion(BinaryTreeNode *root) {
@@ -101,6 +101,32 @@ vector<int> preOrderTraverseNoRecursion(BinaryTreeNode *root) {
     return nodeTraversalList;
 }
 
+vector<int> inOrderTraversalNoRecursion(BinaryTreeNode *root) {
+    // NOTE: NO
+    vector<int> nodeTraversalList;
+    if (!root) return nodeTraversalList;
+
+    stack<BinaryTreeNode *> nodeStack;
+    BinaryTreeNode *currentNode = root;
+    nodeStack.push(currentNode);
+
+    while (!nodeStack.empty()) {
+        // Right Node
+        if (currentNode->right) {
+            nodeStack.push(currentNode->right);
+        }
+
+        if (currentNode->left) {
+            nodeStack.push(currentNode->left);
+        }
+        currentNode = nodeStack.top();
+        nodeStack.pop();
+
+        nodeTraversalList.push_back(currentNode->data);
+    }
+    return nodeTraversalList;
+}
+
 int main() {
     BinaryTreeNode *root = makeSampleTree();
     preOrderTraverse(root);
@@ -110,5 +136,6 @@ int main() {
     inOrderTraverse(root);
     cout << '\n';
     printVector(preOrderTraverseNoRecursion(root));
+    printVector(inOrderTraversalNoRecursion(root));
     return 0;
 }
