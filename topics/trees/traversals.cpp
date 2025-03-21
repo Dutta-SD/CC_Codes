@@ -47,33 +47,61 @@ BinaryTreeNode *makeSampleTree() {
     return root;
 }
 
-void processCurrentNode(int data) {
-    cout << " " << data;
+void processCurrentNode(const int data) {
+    cout << data << ' ';
+}
+
+template <typename T>
+void printVector(vector<T> vec) {
+    for (T e : vec) cout << e << ' ';
+    cout << '\n';
 }
 
 /* Traversals in Trees */
-void preOrderTraverse(BinaryTreeNode *root) {
+void preOrderTraverse(const BinaryTreeNode *root) {
     if (!root) return;
     processCurrentNode(root->data);
     preOrderTraverse(root->left);
     preOrderTraverse(root->right);
 }
 
-void postOrderTraverse(BinaryTreeNode *root) {
+void postOrderTraverse(const BinaryTreeNode *root) {
     if (!root) return;
     preOrderTraverse(root->left);
     preOrderTraverse(root->right);
     processCurrentNode(root->data);
 }
 
-void inOrderTraverse(BinaryTreeNode *root) {
+void inOrderTraverse(const BinaryTreeNode *root) {
     if (!root) return;
     preOrderTraverse(root->left);
     processCurrentNode(root->data);
     preOrderTraverse(root->right);
 }
 
-int main(int argc, char const *argv[]) {
+vector<int> preOrderTraverseNoRecursion(BinaryTreeNode *root) {
+    vector<int> nodeTraversalList;
+    if (!root) return nodeTraversalList;
+
+    stack<BinaryTreeNode *> nodeStack;
+    BinaryTreeNode *currentNode;
+    nodeStack.push(root);
+
+    while (!nodeStack.empty()) {
+        currentNode = nodeStack.top();
+        nodeStack.pop();
+        nodeTraversalList.push_back(currentNode->data);
+        if (currentNode->right) {
+            nodeStack.push(currentNode->right);
+        }
+        if (currentNode->left) {
+            nodeStack.push(currentNode->left);
+        }
+    }
+    return nodeTraversalList;
+}
+
+int main() {
     BinaryTreeNode *root = makeSampleTree();
     preOrderTraverse(root);
     cout << '\n';
@@ -81,5 +109,6 @@ int main(int argc, char const *argv[]) {
     cout << '\n';
     inOrderTraverse(root);
     cout << '\n';
+    printVector(preOrderTraverseNoRecursion(root));
     return 0;
 }
