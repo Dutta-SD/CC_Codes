@@ -1,0 +1,4 @@
+{
+    "github.copilot.editor.enableAutoCompletions": false,
+    "C_Cpp.clang_format_fallbackStyle": "LLVM"
+}
